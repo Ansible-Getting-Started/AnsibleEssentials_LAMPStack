@@ -40,7 +40,7 @@ This demo is meant to show Ansible performing some small-scale configuration in 
     `ansible-playbook -i hosts lamproles.yml`
 
 
-Visit th IP for the webserers group member in a web browser to verify the web app was installed.
+Visit th IP for the webservers group member in a web browser to verify the web app was installed.
 
 **_Contributors:_**
 
