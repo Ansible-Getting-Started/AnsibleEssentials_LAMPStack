@@ -3,12 +3,16 @@
   <title>Ansible Application</title>
  </head>
  <body>
+  <div align=center style="border: 3px dotted black; background-color: powderblue">
  </br>
-  <a href=http://{{ ansible_default_ipv4.address }}/index.html>Homepage</a>
- </br>
+  <h1><a href=http://{{ ansible_default_ipv4.address }}/index.html>Home</a><h1>
+ </br><h2>
 <?php
-Print "Hello, World! I am a web server configured using Ansible and I am : ";
+Print "Hello, World! I am a web server configured using Ansible! My hostname is : ";
 echo exec('hostname')
 ?>
+</h2></br>
+<h1><span style="background-color: gray">ʘ‿ʘ</span></h1></br></br>
+</div>
 </body>
 </html>
