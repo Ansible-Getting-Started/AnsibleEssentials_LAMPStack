@@ -7,13 +7,20 @@
     state: present
 
 - name: Install MySQL Database
-  yum: name=mysql-server state=present
+  yum:
+    name: mysql-server
+    state: present
 
 - name: Install MySQL-python
-  yum: name=MySQL-python state=present
+  yum:
+    name: MySQL-python
+    state: present
 
 - name: Start & Enable MySQL Server to start on boot
-  service: name=mysqld state=started enabled=yes
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
 
 - shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}';
   register: result
@@ -22,12 +29,15 @@
 
 - stat: path=/root/.my.cnf
   register: sym
-- set_fact: mysql_root_pw="{{ masterpassword }}"
+- set_fact:
+    mysql_root_pw: "{{ masterpassword }}"
   when: sym.stat.exists == True
 
 - name: Install .my.cnf with credentials
-  template: src=my.cnf.j2 dest=/root/.my.cnf
-            mode=0400
+  template:
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    mode: 0400
   tags: my_cnf
 
 - name: Set the root password for MySQL Database
@@ -37,15 +47,28 @@
     mysql_root_pw: "{{ masterpassword }}"
 
 - name: install .my.cnf with credentials
-  template: src=my.cnf.j2 dest=/root/.my.cnf
-            mode=0400
+  template:
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    mode: 0400
   tags: my_cnf
 
 - name: Create the database for website
-  mysql_db: name={{ dbname }} state=present
+  mysql_db:
+    name: "{{ dbname }}"
+    state: present
 
 - name: Create the Application user for the database
-  mysql_user: name={{ dbuser }} password={{ upassword }} priv='*.*:ALL' host='%' state=present
+  mysql_user:
+    name: "{{ dbuser }}"
+    password: "{{ upassword }}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
 
 - name: Enable the firewall port for MySQL
-  firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+  firewalld:
+    port: "{{ mysql_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: yes

@@ -1,24 +1,30 @@
 ---
-- name: Simple demo playbook for installing things
+- name: Simple playbook to install stuff
   hosts: demo
   become: yes
 
   tasks:
   - name: Install epel
-    yum: name=epel-release state=present
+    yum:
+      name: epel-release
+      state: present
 
   - name: Install python bindings for selinux
-    yum: name={{item}} state=present
-    with_items:
-      - libselinux-python
-      - libsemanage-python
+    yum:
+      name: ['libselinux-python', 'libsemanage-python']
+      state: present
 
   - name: Test to see if selinux is running
     command: getenforce
     changed_when: false
 
   - name: Install Apache
-    yum: name=httpd state=present
+    yum:
+      name: httpd
+      state: present
 
   - name: Ensure Apache is running
-    service: name=httpd state=started enabled=yes
+    service:
+      name: httpd
+      state: started
+      enabled: yes
