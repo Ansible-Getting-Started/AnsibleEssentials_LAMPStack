@@ -5,7 +5,7 @@ This is the set of playbooks & roles used with the Ansible Essentials 'LAMP Demo
 
 ### Requirements:
   - Vagrant
-    + This will require a hypervisor to be installed, please check the [Vagrant documentation](https://www.vagrantup.com/docs/installation/ "Vagrant documentation") for more info.
+    + Please check the [Vagrant documentation](https://www.vagrantup.com/docs/installation/ "Vagrant documentation") for more info.
   - [Ansible 2.7+](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html "Ansible") (The latest is recommended)
   - Sufficient CPU/RAM/disk to run multiple small VMs
 
